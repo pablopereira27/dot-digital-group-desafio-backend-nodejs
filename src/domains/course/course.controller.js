@@ -24,7 +24,7 @@ module.exports = {
 
   async get(req, res) {
     const usecase = new GetCourseUseCase();
-    const course = await usecase.execute(req.params.id);
+    const course = await usecase.execute(req.params.hash);
     if (!course) return res.status(404).json({ message: "Course not found" });
     res.json(new CourseResponseDTO(course));
   },
@@ -32,14 +32,14 @@ module.exports = {
   async update(req, res) {
     const dto = new UpdateCourseDTO(req.body);
     const usecase = new UpdateCourseUseCase();
-    const course = await usecase.execute(req.params.id, dto);
+    const course = await usecase.execute(req.params.hash, dto);
     if (!course) return res.status(404).json({ message: "Course not found" });
     res.json(new CourseResponseDTO(course));
   },
 
   async remove(req, res) {
     const usecase = new DeleteCourseUseCase();
-    const deleted = await usecase.execute(req.params.id);
+    const deleted = await usecase.execute(req.params.hash);
     if (!deleted) return res.status(404).json({ message: "Course not found" });
     res.status(204).send();
   },

@@ -2,9 +2,9 @@ const { AppDataSource } = require("../../../data-source");
 const Course = require("../entities/course.entity");
 
 class DeleteCourseUseCase {
-  async execute(id) {
+  async execute(hash) {
     const repo = AppDataSource.getRepository(Course);
-    const course = await repo.findOneBy({ id });
+    const course = await repo.findOneBy({ hash });
 
     if (!course) return null;
 

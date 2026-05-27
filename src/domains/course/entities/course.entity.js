@@ -9,6 +9,12 @@ module.exports = new EntitySchema({
       primary: true,
       generated: true,
     },
+    hash: {
+      type: "char",
+      length: 36,
+      unique: true,
+      generated:"uuid",
+    },
     title: {
       type: String,
       length: 255,

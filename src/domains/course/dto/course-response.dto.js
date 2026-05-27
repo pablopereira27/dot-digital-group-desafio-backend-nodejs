@@ -1,6 +1,6 @@
 class CourseResponseDTO {
   constructor(course) {
-    this.id = course.id;
+    this.hash = course.hash;
     this.title = course.title;
     this.description = course.description;
     this.duration_minutes = course.duration_minutes;
