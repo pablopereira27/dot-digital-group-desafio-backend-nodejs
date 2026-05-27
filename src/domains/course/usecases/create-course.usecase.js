@@ -11,6 +11,8 @@ class CreateCourseUseCase {
       duration_minutes: data.duration_minutes,
       level: data.level,
       price: data.price,
+      themes: data.themes,
+      image_url: data.image_url,
     });
 
     await repo.save(course);

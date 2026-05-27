@@ -22,7 +22,7 @@ module.exports = new EntitySchema({
     },
     description: {
       type: "text",
-      nullable: true,
+      nullable: false,
     },
     duration_minutes: {
       type: Number,
@@ -39,6 +39,16 @@ module.exports = new EntitySchema({
       precision: 10,
       scale: 2,
       nullable: true,
+    },
+    themes: {
+      type: "set",
+      enum: ["inovação", "tecnologia", "marketing", "empreendedorismo", "agro"],
+      isNullable: false,
+    },
+    image_url: {
+      type: "varchar",
+      length: 255,
+      isNullable: false,
     },
     created_at: {
       type: "timestamp",
