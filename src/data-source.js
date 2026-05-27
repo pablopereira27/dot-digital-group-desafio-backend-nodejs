@@ -1,8 +1,6 @@
 require("dotenv").config();
 const { DataSource } = require("typeorm");
 
-// const Course = require("./modules/courses/entities/course.entity");
-
 const AppDataSource = new DataSource({
   type: "mysql",
   host: process.env.DB_HOST,
