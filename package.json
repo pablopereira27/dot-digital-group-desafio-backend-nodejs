@@ -17,6 +17,10 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
+    "migration:create": "typeorm migration:create --outputJs",
+    "migration:generate": "typeorm migration:generate --outputJs -d ./src/data-source.js",
+    "migration:run": "typeorm migration:run -d ./src/data-source.js",
+    "migration:revert": "typeorm migration:revert -d ./src/data-source.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
