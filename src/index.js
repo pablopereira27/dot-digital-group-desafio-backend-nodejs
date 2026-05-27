@@ -3,9 +3,12 @@ require("dotenv").config();
 const { AppDataSource } = require("./data-source");
 
 const express = require("express");
+const bodyParser = require('body-parser');
+
 const app = express();
 const port = process.env.APP_PORT || 3000;
 
+app.use(bodyParser.json());
 const routes = require("./routes");
 
 app.use(routes);
