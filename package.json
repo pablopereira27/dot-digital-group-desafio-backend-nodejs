@@ -1,0 +1,29 @@
+{
+  "name": "dot-digital-group-desafio-backend-nodejs",
+  "version": "1.0.0",
+  "description": "Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e usuários.  \r O sistema deve permitir:\r - CRUD de cursos e turmas.  \r - CRUD de usuários.  \r - Matrícula de usuários em turmas disponíveis.  \r - Listagem de cursos e turmas com filtros.  \r - Aplicação de regras de negócio:  \r   - Não permitir matrícula em turmas encerradas ou fora da data.  \r   - Usuário não pode se matricular em mais de uma turma do mesmo curso.",
+  "homepage": "https://github.com/pablopereira27/dot-digital-group-desafio-backend-nodejs#readme",
+  "bugs": {
+    "url": "https://github.com/pablopereira27/dot-digital-group-desafio-backend-nodejs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pablopereira27/dot-digital-group-desafio-backend-nodejs.git"
+  },
+  "license": "ISC",
+  "author": "Pablo Pereira",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
