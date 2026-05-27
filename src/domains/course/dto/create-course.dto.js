@@ -1,10 +1,9 @@
 class CreateCourseDTO {
-  constructor({ title, description, duration_minutes, level, price }) {
+  constructor({ title, description, themes, image_url }) {
     this.title = title;
     this.description = description;
-    this.duration_minutes = duration_minutes;
-    this.level = level;
-    this.price = price;
+    this.themes = themes;
+    this.image_url = image_url;
   }
 }
 module.exports = CreateCourseDTO;
