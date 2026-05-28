@@ -1,10 +1,12 @@
+const { applyCourseValidators } = require("../validations/course.validators");
+
 class UpdateCourseDTO {
-  constructor({ title, description, duration_minutes, level, price }) {
-    if (title !== undefined) this.title = title;
-    if (description !== undefined) this.description = description;
-    if (duration_minutes !== undefined) this.duration_minutes = duration_minutes;
-    if (level !== undefined) this.level = level;
-    if (price !== undefined) this.price = price;
-  }
+  title;
+  description;
+  themes;
+  image_url;
 }
+
+applyCourseValidators(UpdateCourseDTO, { optional: true });
+
 module.exports = UpdateCourseDTO;

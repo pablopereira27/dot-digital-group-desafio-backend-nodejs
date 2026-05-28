@@ -1,3 +1,7 @@
+const { plainToInstance } = require("class-transformer");
+const { validate } = require("class-validator");
+const { formatValidationErrors } = require("../../utils/validations");
+
 const CreateCourseUseCase = require("./usecases/create-course.usecase");
 const ListCoursesUseCase = require("./usecases/list-courses.usecase");
 const GetCourseUseCase = require("./usecases/get-course.usecase");
@@ -10,7 +14,16 @@ const CourseResponseDTO = require("./dto/course-response.dto");
 
 module.exports = {
   async create(req, res) {
-    const dto = new CreateCourseDTO(req.body);
+    const dto = plainToInstance(CreateCourseDTO, req.body);
+    const errors = await validate(dto);
+
+    if (errors.length > 0) {
+      return res.status(400).json({
+        message: "Invalid course data",
+        errors: formatValidationErrors(errors),
+      });
+    }
+
     const usecase = new CreateCourseUseCase();
     const course = await usecase.execute(dto);
     res.status(201).json(new CourseResponseDTO(course));
@@ -30,7 +43,16 @@ module.exports = {
   },
 
   async update(req, res) {
-    const dto = new UpdateCourseDTO(req.body);
+    const dto = plainToInstance(UpdateCourseDTO, req.body);
+    const errors = await validate(dto);
+
+    if (errors.length > 0) {
+      return res.status(400).json({
+        message: "Invalid course data",
+        errors: formatValidationErrors(errors),
+      });
+    }
+
     const usecase = new UpdateCourseUseCase();
     const course = await usecase.execute(req.params.id, dto);
     if (!course) return res.status(404).json({ message: "Course not found" });

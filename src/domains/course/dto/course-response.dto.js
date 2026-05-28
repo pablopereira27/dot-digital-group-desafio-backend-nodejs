@@ -1,12 +1,14 @@
 class CourseResponseDTO {
   constructor(course) {
-    this.id = course.id;
-    this.title = course.title;
-    this.description = course.description;
-    this.themes = course.themes;
-    this.image_url = course.image_url;
-    this.created_at = course.created_at;
-    this.updated_at = course.updated_at;
+    Object.assign(this, {
+      id: course.id,
+      title: course.title,
+      description: course.description,
+      themes: course.themes,
+      image_url: course.image_url,
+      created_at: course.created_at,
+      updated_at: course.updated_at,
+    });
   }
 }
 module.exports = CourseResponseDTO;
