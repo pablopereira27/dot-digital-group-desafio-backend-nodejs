@@ -1,5 +1,10 @@
 // Core libraries
 const express = require("express");
+const pino = require("pino-http");
+
+// Utilitários e Middlewares
+const logger = require("./logger");
+const errorHandler = require('./middlewares/error-handler.middleware');
 
 // Rotas
 const createCourseRoutes = require("./routes/course.routes");
@@ -8,6 +13,7 @@ function createApp(manager) {
   const app = express();
 
   // Middlewares Globais
+  app.use(pino({ logger }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
@@ -20,6 +26,9 @@ function createApp(manager) {
       `${new Date().toLocaleString()} - Servidor em pleno funcionamento!`,
     );
   });
+
+  // Middleware de erro
+  app.use(errorHandler);
 
   return app;
 }
