@@ -1,12 +1,14 @@
 const { Brackets } = require("typeorm");
 
-const { AppDataSource } = require("../../../data-source");
 const Course = require("../entities/course.entity");
 
 class ListCoursesUseCase {
+  constructor(manager) {
+    this.repo = manager.getRepository(Course);
+  }
+
   async execute(page = 1, limit = 10, filters = {}) {
-    const repo = AppDataSource.getRepository(Course);
-    const qb = repo.createQueryBuilder("course");
+    const qb = this.repo.createQueryBuilder("course");
 
     if (filters.title) {
       qb.andWhere("course.title LIKE :title", {

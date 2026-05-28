@@ -1,27 +1,17 @@
 // Configurações
 require("dotenv").config();
 const { AppDataSource } = require("./data-source");
+const createApp = require('./app');
 
-const express = require("express");
-const bodyParser = require('body-parser');
-
-const app = express();
 const port = process.env.APP_PORT || 3000;
-
-app.use(bodyParser.json());
-const routes = require("./routes");
-
-app.use(routes);
 
 // Inicializa o banco antes de subir o servidor
 AppDataSource.initialize()
   .then(() => {
     // logger.info("O banco de dados foi inicializado!");
     console.log("O banco de dados foi inicializado!");
-
-    app.listen(port, () => {
-      console.log(`Example app listening on port ${port}`);
-    });
+    const app = createApp(AppDataSource.manager);
+    app.listen(port, () => console.log(`Server running on port ${port}`));
   })
   .catch((error) => {
     // logger.fatal(

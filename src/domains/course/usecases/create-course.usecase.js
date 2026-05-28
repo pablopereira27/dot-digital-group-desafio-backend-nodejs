@@ -1,11 +1,12 @@
-const { AppDataSource } = require("../../../data-source");
 const Course = require("../entities/course.entity");
 
 class CreateCourseUseCase {
-  async execute(data) {
-    const repo = AppDataSource.getRepository(Course);
+  constructor(manager) {
+    this.repo = manager.getRepository(Course);
+  }
 
-    const course = repo.create({
+  async execute(data) {
+    const course = this.repo.create({
       title: data.title,
       description: data.description,
       duration_minutes: data.duration_minutes,
@@ -15,7 +16,7 @@ class CreateCourseUseCase {
       image_url: data.image_url,
     });
 
-    await repo.save(course);
+    await this.repo.save(course);
     return course;
   }
 }

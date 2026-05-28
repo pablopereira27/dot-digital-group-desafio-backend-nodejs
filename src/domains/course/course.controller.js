@@ -14,69 +14,101 @@ const UpdateCourseDTO = require("./dto/update-course.dto");
 const CourseResponseDTO = require("./dto/course-response.dto");
 const CourseListResponseDTO = require("./dto/course-list-response.dto");
 
-module.exports = {
-  async create(req, res) {
-    const dto = plainToInstance(CreateCourseDTO, req.body);
-    const errors = await validate(dto);
+class CourseController {
+  constructor(manager) {
+    this.manager = manager;
+  }
 
-    if (errors.length > 0) {
-      return res.status(400).json({
-        message: "Invalid course data",
-        errors: formatValidationErrors(errors),
-      });
+  create = async (req, res, next) => {
+    try {
+      const dto = plainToInstance(CreateCourseDTO, req.body);
+      const errors = await validate(dto);
+      
+      if (errors.length > 0) {
+        return res.status(400).json({
+          message: "Invalid course data",
+          errors: formatValidationErrors(errors),
+        });
+      }
+
+      
+      const usecase = new CreateCourseUseCase(this.manager);
+      const course = await usecase.execute(dto);
+      res.status(201).json(new CourseResponseDTO(course));
+    } catch (error) {
+      next(error);
     }
+  };
 
-    const usecase = new CreateCourseUseCase();
-    const course = await usecase.execute(dto);
-    res.status(201).json(new CourseResponseDTO(course));
-  },
+  list = async (req, res, next) => {
+    try {
+      const pageParsed = parseInt(req.query.page) || 1;
+      const page = pageParsed > 0 ? pageParsed : 1;
 
-  async list(req, res) {
-    const pageParsed = parseInt(req.query.page) || 1;
-    const page = pageParsed > 0 ? pageParsed : 1;
+      const limitParsed = parseInt(req.query.limit) || 10;
+      const limit =
+        limitParsed > 0 ? (limitParsed > 100 ? 100 : limitParsed) : 10;
 
-    const limitParsed = parseInt(req.query.limit) || 10;
-    const limit =
-      limitParsed > 0 ? (limitParsed > 100 ? 100 : limitParsed) : 10;
+      const filters = sanitizeQuery(req.query);
 
-    const filters = sanitizeQuery(req.query);
+      const usecase = new ListCoursesUseCase(this.manager);
+      const [courses, total] = await usecase.execute(page, limit, filters);
 
-    const usecase = new ListCoursesUseCase();
-    const [courses, total] = await usecase.execute(page, limit, filters);
-
-    res.json(
-      new CourseListResponseDTO(courses, { page, limit, total, filters }),
-    );
-  },
-
-  async get(req, res) {
-    const usecase = new GetCourseUseCase();
-    const course = await usecase.execute(req.params.id);
-    if (!course) return res.status(404).json({ message: "Course not found" });
-    res.json(new CourseResponseDTO(course));
-  },
-
-  async update(req, res) {
-    const dto = plainToInstance(UpdateCourseDTO, req.body);
-    const errors = await validate(dto);
-
-    if (errors.length > 0) {
-      return res.status(400).json({
-        message: "Invalid course data",
-        errors: formatValidationErrors(errors),
-      });
+      res.json(
+        new CourseListResponseDTO(courses, { page, limit, total, filters }),
+      );
+    } catch (error) {
+      next(error);
     }
+  };
 
-    const usecase = new UpdateCourseUseCase();
-    const course = await usecase.execute(req.params.id, dto);
-    if (!course) return res.status(404).json({ message: "Course not found" });
-    res.json(new CourseResponseDTO(course));
-  },
+  get = async (req, res, next) => {
+    try {
+      const usecase = new GetCourseUseCase(this.manager);
+      const course = await usecase.execute(req.params.id);
 
-  async remove(req, res) {
-    const usecase = new DeleteCourseUseCase();
-    const deleted = await usecase.execute(req.params.id);
-    if (!deleted) return res.status(404).json({ message: "Course not found" });
-    res.status(204).send();
-  },
-};
+      if (!course) return res.status(404).json({ message: "Course not found" });
+      res.json(new CourseResponseDTO(course));
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  update = async (req, res, next) => {
+    try {
+      const dto = plainToInstance(UpdateCourseDTO, req.body);
+      const errors = await validate(dto);
+
+      if (errors.length > 0) {
+        return res.status(400).json({
+          message: "Invalid course data",
+          errors: formatValidationErrors(errors),
+        });
+      }
+
+      const usecase = new UpdateCourseUseCase(this.manager);
+      const course = await usecase.execute(req.params.id, dto);
+
+      if (!course) return res.status(404).json({ message: "Course not found" });
+      res.json(new CourseResponseDTO(course));
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  remove = async (req, res, next) => {
+    try {
+      const usecase = new DeleteCourseUseCase(this.manager);
+      const deleted = await usecase.execute(req.params.id);
+
+      if (!deleted)
+        return res.status(404).json({ message: "Course not found" });
+
+      res.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+}
+
+module.exports = CourseController;

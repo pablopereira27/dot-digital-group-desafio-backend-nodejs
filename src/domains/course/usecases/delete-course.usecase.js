@@ -1,14 +1,16 @@
-const { AppDataSource } = require("../../../data-source");
 const Course = require("../entities/course.entity");
 
 class DeleteCourseUseCase {
+  constructor(manager) {
+    this.repo = manager.getRepository(Course);
+  }
+
   async execute(id) {
-    const repo = AppDataSource.getRepository(Course);
-    const course = await repo.findOneBy({ id });
+    const course = await this.repo.findOneBy({ id });
 
     if (!course) return null;
 
-    await repo.remove(course);
+    await this.repo.remove(course);
     return true;
   }
 }

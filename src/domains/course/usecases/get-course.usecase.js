@@ -1,10 +1,12 @@
-const { AppDataSource } = require("../../../data-source");
 const Course = require("../entities/course.entity");
 
 class GetCourseUseCase {
+  constructor(manager) {
+    this.repo = manager.getRepository(Course);
+  }
+
   async execute(id) {
-    const repo = AppDataSource.getRepository(Course);
-    return await repo.findOneBy({ id });
+    return await this.repo.findOneBy({ id });
   }
 }
 
