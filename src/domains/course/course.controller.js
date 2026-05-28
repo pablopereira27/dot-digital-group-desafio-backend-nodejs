@@ -23,7 +23,7 @@ class CourseController {
     try {
       const dto = plainToInstance(CreateCourseDTO, req.body);
       const errors = await validate(dto);
-      
+
       if (errors.length > 0) {
         return res.status(400).json({
           message: "Invalid course data",
@@ -31,7 +31,6 @@ class CourseController {
         });
       }
 
-      
       const usecase = new CreateCourseUseCase(this.manager);
       const course = await usecase.execute(dto);
       res.status(201).json(new CourseResponseDTO(course));
@@ -42,20 +41,30 @@ class CourseController {
 
   list = async (req, res, next) => {
     try {
-      const pageParsed = parseInt(req.query.page) || 1;
-      const page = pageParsed > 0 ? pageParsed : 1;
+      const { page, limit, ...filters } = req.query;
+      const pageParsed = parseInt(page) || 1;
+      const actualPage = pageParsed > 0 ? pageParsed : 1;
 
-      const limitParsed = parseInt(req.query.limit) || 10;
-      const limit =
+      const limitParsed = parseInt(limit) || 10;
+      const selectedLimit =
         limitParsed > 0 ? (limitParsed > 100 ? 100 : limitParsed) : 10;
 
-      const filters = sanitizeQuery(req.query);
+      const filtersSanitized = sanitizeQuery(filters);
 
       const usecase = new ListCoursesUseCase(this.manager);
-      const [courses, total] = await usecase.execute(page, limit, filters);
+      const [courses, total] = await usecase.execute(
+        actualPage,
+        selectedLimit,
+        filtersSanitized,
+      );
 
       res.json(
-        new CourseListResponseDTO(courses, { page, limit, total, filters }),
+        new CourseListResponseDTO(courses, {
+          page: actualPage,
+          limit: selectedLimit,
+          total,
+          filters: filtersSanitized,
+        }),
       );
     } catch (error) {
       next(error);
