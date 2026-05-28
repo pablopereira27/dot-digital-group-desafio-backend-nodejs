@@ -1,6 +1,7 @@
 const { plainToInstance } = require("class-transformer");
 const { validate } = require("class-validator");
 const { formatValidationErrors } = require("../../utils/validations");
+const { sanitizeQuery } = require("../../utils/sanitize-query");
 
 const CreateCourseUseCase = require("./usecases/create-course.usecase");
 const ListCoursesUseCase = require("./usecases/list-courses.usecase");
@@ -11,6 +12,7 @@ const DeleteCourseUseCase = require("./usecases/delete-course.usecase");
 const CreateCourseDTO = require("./dto/create-course.dto");
 const UpdateCourseDTO = require("./dto/update-course.dto");
 const CourseResponseDTO = require("./dto/course-response.dto");
+const CourseListResponseDTO = require("./dto/course-list-response.dto");
 
 module.exports = {
   async create(req, res) {
@@ -30,9 +32,21 @@ module.exports = {
   },
 
   async list(req, res) {
+    const pageParsed = parseInt(req.query.page) || 1;
+    const page = pageParsed > 0 ? pageParsed : 1;
+
+    const limitParsed = parseInt(req.query.limit) || 10;
+    const limit =
+      limitParsed > 0 ? (limitParsed > 100 ? 100 : limitParsed) : 10;
+
+    const filters = sanitizeQuery(req.query);
+
     const usecase = new ListCoursesUseCase();
-    const courses = await usecase.execute();
-    res.json(courses.map((course) => new CourseResponseDTO(course)));
+    const [courses, total] = await usecase.execute(page, limit, filters);
+
+    res.json(
+      new CourseListResponseDTO(courses, { page, limit, total, filters }),
+    );
   },
 
   async get(req, res) {
