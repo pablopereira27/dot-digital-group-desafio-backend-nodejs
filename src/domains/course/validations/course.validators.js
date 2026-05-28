@@ -7,6 +7,14 @@ const {
   IsOptional,
 } = require("class-validator");
 
+const ThemesEnum = {
+  INOVAÇÃO: "inovação",
+  TECNOLOGIA: "tecnologia",
+  MARKETING: "marketing",
+  EMPREENDENRISMO: "empreendedorismo",
+  AGRO: "agro",
+};
+
 function applyCourseValidators(target, { optional = false } = {}) {
   if (optional) {
     IsOptional()(target.prototype, "title");
@@ -23,9 +31,7 @@ function applyCourseValidators(target, { optional = false } = {}) {
 
   IsArray()(target.prototype, "themes");
   ArrayNotEmpty()(target.prototype, "themes");
-  IsIn(["inovação", "tecnologia", "marketing", "empreendedorismo", "agro"], {
-    each: true,
-  })(target.prototype, "themes");
+  IsIn(ThemesEnum, { each: true })(target.prototype, "themes");
 
   IsString()(target.prototype, "image_url");
   IsNotEmpty()(target.prototype, "image_url");
