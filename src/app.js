@@ -9,6 +9,7 @@ const errorHandler = require("./middlewares/error-handler.middleware");
 
 // Rotas
 const createCourseRoutes = require("./routes/course.routes");
+const createCohortRoutes = require("./routes/cohort.routes");
 
 function createApp(manager) {
   const app = express();
@@ -21,6 +22,7 @@ function createApp(manager) {
   // Rotas e Documentação
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/courses", createCourseRoutes(manager));
+  app.use("/cohorts", createCohortRoutes(manager));
 
   // Health check
   app.get("/", (req, res) => {
