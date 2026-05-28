@@ -3,8 +3,9 @@ const express = require("express");
 const pino = require("pino-http");
 
 // Utilitários e Middlewares
+const { swaggerUi, swaggerSpec } = require("./swagger/swagger.config");
 const logger = require("./logger");
-const errorHandler = require('./middlewares/error-handler.middleware');
+const errorHandler = require("./middlewares/error-handler.middleware");
 
 // Rotas
 const createCourseRoutes = require("./routes/course.routes");
@@ -18,6 +19,7 @@ function createApp(manager) {
   app.use(express.urlencoded({ extended: true }));
 
   // Rotas e Documentação
+  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use("/courses", createCourseRoutes(manager));
 
   // Health check
