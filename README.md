@@ -1,90 +1,185 @@
 # 📚 Backend Challenge - Dot Digital Group
 
 ## 🎯 Objetivo
-Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e usuários.  
-O sistema deve permitir:
-- CRUD de cursos e turmas.  
-- CRUD de usuários.  
-- Matrícula de usuários em turmas disponíveis.  
-- Listagem de cursos e turmas com filtros.  
-- Aplicação de regras de negócio:  
-  - Não permitir matrícula em turmas encerradas ou fora da data.  
-  - Usuário não pode se matricular em mais de uma turma do mesmo curso.  
+Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e usuários.
 
----
+### Requisitos
+1. Deve ser possível criar, atualizar e excluir um curso. O curso deve possuir título, descrição, temas (inovação, tecnologia, marketing, empreendedorismo, agro) e URL de imagem ; 
+2. Deve ser possível criar, atualizar e excluir uma turma para um curso. Um curso pode ter múltiplas turmas. A turma deve possuir título, descrição, quantidade de vagas, status (disponível, encerrado), data de início e data de fim; 
+3. Deve ser possível criar e excluir um usuário. O usuário deve possuir nome e email. 
+
+### Casos de uso
+1. Deve ser possível criar um curso e criar turmas para esse curso; 
+2. Cursos com turmas disponíveis devem ser listadas em um endpoint para visualização e deve possuir os seguintes filtros: filtro por título e filtro por temas; 
+3. Deve ser possível matricular um usuário em uma turma disponível; 
+4. Não deve permitir matricular um usuário em turmas encerradas ou fora da data de início e fim; 
+5. Deve ser possível listar todos os cursos que um usuário está matriculado; 
+6. Um usuário não deve conseguir se matricular em mais de uma turma para o mesmo curso.
+
+### Fora de escopo
+1. Não é necessário implementar login e autenticação para o usuário.
 
 ## 🛠️ Tecnologias Utilizadas
 - **Node.js** → runtime do backend.  
 - **Express.js** → framework para criação dos endpoints REST.  
-<!-- - **MySQL** → banco de dados relacional.  
+- **MySQL** → banco de dados relacional.  
 - **TypeORM** → ORM para modelagem e persistência.  
 - **Jest** → testes unitários.  
 - **Supertest** → testes de integração para endpoints HTTP.  
 - **Docker & Docker Compose** → containerização da aplicação e banco.  
 - **Dotenv** → gerenciamento de variáveis de ambiente.  
 - **Nodemon** → hot reload em desenvolvimento.  
-- **Swagger (OpenAPI)** → documentação dos endpoints.   -->
-
-<!-- ---
+- **Swagger (OpenAPI)** → documentação dos endpoints.
 
 ## 🧪 Metodologia
-- **TDD (Test Driven Development)** → escrever testes antes da implementação.  
-- **DDD (Domain Driven Design)** → organização do código em camadas (domain, application, infrastructure).  
-- **DTOs (Data Transfer Objects)** → padronização de entrada e saída de dados.   -->
-
----
+- **DDD (Domain Driven Design)** → Implementação parcial e adaptada da organização do código em camadas (domain, application, infrastructure).  
+- **DTOs (Data Transfer Objects)** → Padronização e tratamento de entrada e saída de dados.
 
 ## 📂 Estrutura de Pastas (sugestão)
 
 ```
-src/
-├── modules/
-│    ├── courses/
-│    │    ├── dto/
-│    │    ├── entities/
-│    │    ├── repositories/
-│    │    ├── services/
-│    │    └── controllers/
-│    ├── users/
-│    └── enrollments/
-├── config/
-├── database/
-├── tests/
-└── app.ts
+<root>
+├── src/
+│    ├── database/migrations
+│    ├── domains/
+│    │    ├── courses/
+│    │    │    ├── dto/
+│    │    │    ├── entities/
+│    │    │    ├── usecases/
+│    │    │    ├── validations/
+│    │    │    └── controllers/
+│    │    ├── users/
+│    │    └── enrollments/
+│    ├── middlewares/
+│    ├── routes/
+│    ├── swagger/
+│    ├── utils/
+│    ├── app.js
+│    ├── data-source.js
+│    └── index.js
+└── tests/
 ```
 
----
+## 🚀 Etapas de Desenvolvimento
 
-## 🚀 Etapas de Implementação
-1. **Configuração inicial**
-   - Criar projeto Node.js com Express.
-   - Configurar TypeORM + MySQL.
-   - Configurar Docker.
+<details>
+    <summary>✅ 1. Configuração inicial</summary>
 
-2. **Modelagem de entidades**
-   - Curso (Course).
-   - Turma (Cohort, para que o nome Class não conflite com termo reservado da linguagem).
-   - Usuário (User).
-   - Matrícula (Enrollment).
+- Criar projeto Node.js com Express
+- Configurar TypeORM + MySQL
+- Configurar Docker
 
-3. **Criação dos endpoints**
-   - CRUD de cursos e turmas.
-   - CRUD de usuários.
-   - Matrícula de usuários em turmas.
-   - Listagem de cursos e turmas com filtros.
+</details>
 
-4. **Regras de negócio**
-   - Validação de status e datas da turma.
-   - Restrição de múltiplas matrículas no mesmo curso.
+<details>
+    <summary>✅ 2. Implementação do CRUD de Cursos (Courses)</summary>
 
-5. **Documentação**
-   - Configurar Swagger para endpoints.
+- Criar Migrations e definir Entidade nos parâmetros do ORM
+- Definir Rotas
+- Implementar Controller e UseCases
+- Aplicar Validações e Tratamentos através de DTOs em entradas e saídas
 
-6. **Testes**
-   - Unitários com Jest.
-   - Integração com Supertest.
-   - Cobrir casos de sucesso e falha.
+</details>
 
-7. **Finalização**
-   - Ajustes finais.
-   - Geração do pacote ZIP para entrega.
+<details>
+    <summary>✅ 3. Testes Unitários/Integração para Cursos</summary>
+
+- Teste Unitários com Jest
+- Teste Integração com Supertest
+- Cobrir casos de sucesso e falha
+
+</details>
+
+<details>
+    <summary>✅ 4. Documentar Endpoints de Cursos</summary>
+
+- Configurar Swagger
+- Implementar documentações para Endpoints e DTOs
+
+</details>
+
+<details>
+    <summary>⬜ 5. Implementação do CRUD de Turmas (Cohorts)</summary>
+Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado da linguagem
+
+- Criar Migrations e definir Entidade nos parâmetros do ORM
+- Definir Rotas
+- Implementar Controller e UseCases
+- Aplicar Validações e Tratamentos através de DTOs em entradas e saídas
+
+</details>
+
+<details>
+    <summary>⬜ 6. Testes Unitários/Integração para Turmas</summary>
+
+- Teste Unitários com Jest
+- Teste Integração com Supertest
+- Cobrir casos de sucesso e falha
+
+</details>
+
+<details>
+    <summary>⬜ 7. Documentar Endpoints de Turmas</summary>
+
+- Implementar documentações para Endpoints e DTOs
+
+</details>
+
+<details>
+    <summary>⬜ 8. Implementação do CRUD de Usuários (Users)</summary>
+
+- Criar Migrations e definir Entidade nos parâmetros do ORM
+- Definir Rotas
+- Implementar Controller e UseCases
+- Aplicar Validações e Tratamentos através de DTOs em entradas e saídas
+
+</details>
+
+<details>
+    <summary>⬜ 9. Testes Unitários/Integração para Usuários</summary>
+
+- Teste Unitários com Jest
+- Teste Integração com Supertest
+- Cobrir casos de sucesso e falha
+
+</details>
+
+<details>
+    <summary>⬜ 10. Documentar Endpoints de Usuários</summary>
+
+- Implementar documentações para Endpoints e DTOs
+
+</details>
+
+<details>
+    <summary>⬜ 11. Implementação do CRUD de Matrículas (Enrollments)</summary>
+
+- Criar Migrations e definir Entidade nos parâmetros do ORM
+- Definir Rotas
+- Implementar Controller e UseCases
+- Aplicar Validações e Tratamentos através de DTOs em entradas e saídas
+
+</details>
+
+<details>
+    <summary>⬜ 12. Testes Unitários/Integração para Matrículas</summary>
+
+- Teste Unitários com Jest
+- Teste Integração com Supertest
+- Cobrir casos de sucesso e falha
+
+</details>
+
+<details>
+    <summary>⬜ 13. Documentar Endpoints de Matrículas</summary>
+
+- Implementar documentações para Endpoints e DTOs
+
+</details>
+
+<details>
+    <summary>⬜ 14. Finalização</summary>
+
+- Ajustes finais
+
+</details>
