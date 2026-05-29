@@ -10,6 +10,7 @@ class CohortResponseDTO {
       end_date: cohort.end_date,
       created_at: cohort.created_at,
       updated_at: cohort.updated_at,
+      course_id: cohort.course?.id,
     });
   }
 }

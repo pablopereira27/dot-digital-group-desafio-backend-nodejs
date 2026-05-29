@@ -1,4 +1,5 @@
 const Cohort = require("../entities/cohort.entity");
+const { normalizeCohortData } = require("../helpers/normalize-cohort-data.helper");
 
 class CreateCohortUseCase {
   constructor(manager) {
@@ -6,16 +7,8 @@ class CreateCohortUseCase {
   }
 
   async execute(data) {
-    const cohort = this.repo.create({
-      title: data.title,
-      description: data.description,
-      vacancies: data.vacancies,
-      status: data.status,
-      start_date: data.start_date,
-      end_date: data.end_date,
-      course: { id: data.course_id },
-    });
-
+    const cohortData = normalizeCohortData(data);
+    const cohort = this.repo.create(cohortData);
     await this.repo.save(cohort);
     return cohort;
   }

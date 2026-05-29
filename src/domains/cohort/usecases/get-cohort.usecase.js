@@ -6,7 +6,10 @@ class GetCohortUseCase {
   }
 
   async execute(id) {
-    return await this.repo.findOneBy({ id });
+    return await this.repo.findOne({
+      where: { id },
+      relations: { course: true }
+    });
   }
 }
 

@@ -3,8 +3,11 @@ const { applyCohortValidators } = require("../validations/cohort.validators");
 class UpdateCohortDTO {
   title;
   description;
-  themes;
-  image_url;
+  vacancies;
+  status;
+  start_date;
+  end_date;
+  course_id;
 }
 
 applyCohortValidators(UpdateCohortDTO, { optional: true });
