@@ -5,4 +5,6 @@
  *     description: Endpoints relacionados a cursos
  *   - name: Cohorts
  *     description: Endpoints relacionados a turmas
+ *   - name: Users
+ *     description: Endpoints relacionados a usuários
  */
