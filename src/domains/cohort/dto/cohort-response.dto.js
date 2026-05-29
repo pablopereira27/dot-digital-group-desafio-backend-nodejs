@@ -1,3 +1,5 @@
+const { buildHateoasLinks } = require("../../../utils/hateoas.util");
+
 class CohortResponseDTO {
   constructor(cohort) {
     Object.assign(this, {
@@ -12,6 +14,8 @@ class CohortResponseDTO {
       updated_at: cohort.updated_at,
       course_id: cohort.course?.id,
     });
+
+    this.links = buildHateoasLinks("/cohorts", { id: cohort.id });
   }
 }
 module.exports = CohortResponseDTO;
