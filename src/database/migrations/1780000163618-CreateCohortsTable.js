@@ -1,9 +1,4 @@
-const {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} = require("typeorm");
+const { Table, TableForeignKey } = require("typeorm");
 
 module.exports = class CreateCohortsTable1780000163618 {
   async up(queryRunner) {
