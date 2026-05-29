@@ -129,7 +129,7 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 8. Implementação do CRUD de Usuários (Users)</summary>
+    <summary>✅ 8. Implementação do CRUD de Usuários (Users)</summary>
 
 - Criar Migrations e definir Entidade nos parâmetros do ORM
 - Definir Rotas
@@ -139,7 +139,7 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 9. Testes Unitários/Integração para Usuários</summary>
+    <summary>✅ 9. Testes Unitários/Integração para Usuários</summary>
 
 - Teste Unitários com Jest
 - Teste Integração com Supertest
