@@ -22,20 +22,10 @@ module.exports = new EntitySchema({
     },
   },
   relations: {
-    cohorts: {
-      target: "Cohort",
-      type: "many-to-many",
-      joinTable: {
-        name: "user_cohorts",
-        joinColumn: {
-          name: "user_id",
-          referencedColumnName: "id",
-        },
-        inverseJoinColumn: {
-          name: "cohort_id",
-          referencedColumnName: "id",
-        },
-      },
+    enrollments: {
+      target: "Enrollment",
+      type: "one-to-many",
+      inverseSide: "user",
     },
   },
 });

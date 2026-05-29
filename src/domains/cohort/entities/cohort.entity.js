@@ -51,5 +51,10 @@ module.exports = new EntitySchema({
       joinColumn: { name: "course_id" },
       onDelete: "CASCADE",
     },
+    enrollments: {
+      target: "Enrollment",
+      type: "one-to-many",
+      inverseSide: "cohort",
+    },
   },
 });
