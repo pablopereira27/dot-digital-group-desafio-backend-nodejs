@@ -16,7 +16,7 @@
  *         - updated_at
  *       properties:
  *         id:
- *           type: string
+ *           type: integer
  *           description: Unique identifier of the cohort
  *         title:
  *           type: string

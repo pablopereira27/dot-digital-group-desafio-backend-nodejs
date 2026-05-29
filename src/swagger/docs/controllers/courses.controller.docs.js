@@ -22,6 +22,11 @@
  *         schema:
  *           type: string
  *           enum: [inovação, tecnologia, marketing, empreendedorismo, agro]
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [disponível, encerrado]
  *     responses:
  *       200:
  *         description: List of courses

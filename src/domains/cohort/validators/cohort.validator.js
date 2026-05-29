@@ -1,14 +1,11 @@
 const {
   IsString,
   IsNotEmpty,
-  IsArray,
-  ArrayNotEmpty,
-  IsIn,
   IsInt,
   IsOptional,
   IsEnum,
-  IsPositive,
   IsDateString,
+  Min,
 } = require("class-validator");
 
 const CohortStatus = {
@@ -35,7 +32,7 @@ function applyCohortValidators(target, { optional = false } = {}) {
 
   IsInt()(target.prototype, "vacancies");
   IsNotEmpty()(target.prototype, "vacancies");
-  IsPositive()(target.prototype, "vacancies");
+  Min(0)(target.prototype, "vacancies");
 
   IsEnum(Object.values(CohortStatus))(target.prototype, "status");
 

@@ -9,7 +9,7 @@
  *         - email
  *       properties:
  *         id:
- *           type: string
+ *           type: integer
  *           description: Unique identifier of the user
  *         name:
  *           type: string

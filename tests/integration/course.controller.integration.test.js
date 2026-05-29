@@ -72,4 +72,60 @@ describe("Course Controller - Integration Tests", () => {
 
     expect(res).toHaveStatus(204);
   });
+
+  it("GET /courses com filtros deve retornar curso com turma válida", async () => {
+    const createCourseRes = await request(testApp())
+      .post("/courses")
+      .send(courseData);
+    expect(createCourseRes).toHaveStatus(201);
+    const courseId = createCourseRes.body.id;
+
+    // cria turma válida para o curso
+    let start_date = new Date();
+    start_date.setDate(start_date.getDate() - 10);
+
+    let end_date = new Date();
+    end_date.setDate(start_date.getDate() + 30);
+
+    const cohortData = {
+      title: `Turma de JavaScript ${start_date.getFullYear()}-${start_date.getMonth() + 1}`,
+      description: "Turma de testes",
+      vacancies: 10,
+      status: "disponível",
+      start_date: start_date.toISOString().split("T")[0],
+      end_date: end_date.toISOString().split("T")[0],
+      course_id: courseId,
+    };
+
+    const createCohortRes = await request(testApp())
+      .post("/cohorts")
+      .send(cohortData);
+    expect(createCohortRes).toHaveStatus(201);
+
+    // lista cursos com filtros que devem encontrar o curso
+    const res = await request(testApp()).get(
+      `/courses?page=1&limit=5&status=disponível&title=${encodeURIComponent(
+        courseData.title,
+      )}&themes=${courseData.themes[0]}&themes=${courseData.themes[1]}`,
+    );
+
+    expect(res).toHaveStatus(200);
+    expect(Array.isArray(res.body.data)).toBe(true);
+    expect(res.body.pagination.total).toBeGreaterThan(0);
+
+    const course = res.body.data.find((c) => c.id === courseId);
+    expect(course).toBeDefined();
+    expect(course.title).toBe(courseData.title);
+    expect(course.description).toBe(courseData.description);
+    expect(course.themes).toEqual(expect.arrayContaining(courseData.themes));
+
+    // check se existe ao menos 1 turma válida dentro do curso
+    expect(Array.isArray(course.cohorts)).toBe(true);
+    expect(course.cohorts.length).toBeGreaterThan(0);
+
+    const cohort = course.cohorts[0];
+    expect(cohort.title).toBe(cohortData.title);
+    expect(cohort.status).toBe("disponível");
+    expect(cohort.vacancies).toBeGreaterThan(0);
+  });
 });

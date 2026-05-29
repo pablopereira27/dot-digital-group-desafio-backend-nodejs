@@ -37,4 +37,12 @@ module.exports = new EntitySchema({
       updateDate: true,
     },
   },
+  relations: {
+    cohorts: {
+      type: "one-to-many",
+      target: "Cohort",
+      inverseSide: "course",
+      cascade: true,
+    },
+  },
 });

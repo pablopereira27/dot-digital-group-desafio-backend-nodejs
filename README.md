@@ -163,9 +163,9 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 <details>
     <summary>⬜ 11. Implementação e Documentação de Turmas Disponíveis por Curso</summary>
 
-- Adicionar filtro de turma disponível por curso (status=disponível) ao endpoint `GET /courses`
+- Adicionar filtro de turma disponível por curso (`status=disponível`) ao endpoint `GET /courses`
 - Aplicar regras de negócio:
-    - Apenas cursos com turmas disponíveis devem ser retornados quando filtrados por status=disponível
+    - Apenas cursos com turmas disponíveis (`status=disponível` e `vacancies > 0`) devem ser retornados quando filtrados por `status=disponível`
 - Criar testes unitários e de integração cobrindo esse novo filtro
 - Documentar endpoint `GET /courses?status=disponível` com filtros (title, theme)
 

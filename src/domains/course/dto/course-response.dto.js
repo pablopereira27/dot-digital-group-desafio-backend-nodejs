@@ -10,6 +10,7 @@ class CourseResponseDTO {
       image_url: course.image_url,
       created_at: course.created_at,
       updated_at: course.updated_at,
+      cohorts: course.cohorts
     });
 
     this.links = buildHateoasLinks("/courses", { id: course.id });

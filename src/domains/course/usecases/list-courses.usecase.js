@@ -8,7 +8,27 @@ class ListCoursesUseCase {
   }
 
   async execute(page = 1, limit = 10, filters = {}) {
-    const qb = this.repo.createQueryBuilder("course");
+    const qb = this.repo
+      .createQueryBuilder("course")
+      .leftJoin("course.cohorts", "cohort")
+      .addSelect([
+        "cohort.id",
+        "cohort.title",
+        "cohort.status",
+        "cohort.vacancies",
+        "cohort.start_date",
+        "cohort.end_date",
+      ]);
+
+    if (filters.status) {
+      qb.andWhere("cohort.status = :status", {
+        status: filters.status,
+      });
+
+      if (filters.status === "disponível") {
+        qb.andWhere("cohort.vacancies > 0");
+      }
+    }
 
     if (filters.title) {
       qb.andWhere("course.title LIKE :title", {
