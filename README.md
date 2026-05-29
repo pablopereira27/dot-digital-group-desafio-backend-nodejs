@@ -110,7 +110,7 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 6. Testes Unitários/Integração para Turmas</summary>
+    <summary>✅ 6. Testes Unitários/Integração para Turmas</summary>
 
 - Teste Unitários com Jest
 - Teste Integração com Supertest

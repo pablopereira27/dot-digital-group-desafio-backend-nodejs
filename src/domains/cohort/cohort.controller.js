@@ -31,8 +31,6 @@ class CohortController {
         });
       }
 
-      console.log("Creating cohort with data:", dto);
-
       const usecase = new CreateCohortUseCase(this.manager);
       const cohort = await usecase.execute(dto);
       res.status(201).json(new CohortResponseDTO(cohort));
