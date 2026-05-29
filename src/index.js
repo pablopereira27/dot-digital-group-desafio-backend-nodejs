@@ -1,5 +1,5 @@
 // Configurações
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 
 const { AppDataSource } = require("./data-source");
 const createApp = require("./app");

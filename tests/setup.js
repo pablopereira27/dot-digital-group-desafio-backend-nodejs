@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 
 const envFile = `.env.${process.env.NODE_ENV || "development"}`;
-dotenv.config({ path: envFile });
+dotenv.config({ path: envFile, quiet: true });
 
 const { AppDataSource } = require("../src/data-source");
 const createApp = require("../src/app");

@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 const { DataSource } = require("typeorm");
 
 const AppDataSource = new DataSource({
