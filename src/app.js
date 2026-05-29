@@ -11,6 +11,7 @@ const errorHandler = require("./middlewares/error-handler.middleware");
 const createCourseRoutes = require("./routes/course.routes");
 const createCohortRoutes = require("./routes/cohort.routes");
 const createUserRoutes = require("./routes/user.routes");
+const createEnrollmentRoutes = require("./routes/enrollment.routes");
 
 function createApp(manager) {
   const app = express();
@@ -25,7 +26,8 @@ function createApp(manager) {
   app.use("/courses", createCourseRoutes(manager));
   app.use("/cohorts", createCohortRoutes(manager));
   app.use("/users", createUserRoutes(manager));
-  
+  app.use("/enrollments", createEnrollmentRoutes(manager));
+
   // Health check
   app.get("/", (req, res) => {
     res.send(

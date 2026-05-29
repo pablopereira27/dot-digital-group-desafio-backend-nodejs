@@ -161,7 +161,7 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 11. Implementação e Documentação de Turmas Disponíveis por Curso</summary>
+    <summary>✅ 11. Implementação e Documentação de Turmas Disponíveis por Curso</summary>
 
 - Adicionar filtro de turma disponível por curso (`status=disponível`) ao endpoint `GET /courses`
 - Aplicar regras de negócio:
@@ -172,12 +172,13 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 12. Implementação do CRUD de Matrículas (Enrollments)</summary>
+    <summary>⬜ 12. Implementação dos Endpoints de Matrículas (Enrollments)</summary>
 
 - Criar Migrations e definir Entidade `Enrollment` com status (`ativo`, `trancado`, `abandonado`, `concluído`)
 - Definir Rotas:
   - `POST /enrollments` → matricular usuário em turma disponível
   - `PATCH /enrollments/:id` → atualizar status da matrícula (mantendo histórico)
+  - `DELETE /enrollments/:id` → desinscrever usuário da turma (remoção definitiva)
   - `GET /users/:id/courses` para listar cursos em que o usuário está ou esteve matriculado
 - Implementar Controller e UseCases com regras de negócio:
   - Não permitir matrícula em turmas encerradas ou fora da data de início/fim
