@@ -1,9 +1,9 @@
 /**
  * @openapi
- * /courses:
+ * /cohorts:
  *   get:
- *     summary: List courses
- *     tags: [Courses]
+ *     summary: List cohorts
+ *     tags: [Cohorts]
  *     parameters:
  *       - in: query
  *         name: page
@@ -15,33 +15,33 @@
  *           type: integer
  *     responses:
  *       200:
- *         description: List of courses
+ *         description: List of cohorts
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CourseListResponseDTO'
+ *               $ref: '#/components/schemas/CohortListResponseDTO'
  *   post:
- *     summary: Create a new course
- *     tags: [Courses]
+ *     summary: Create a new cohort
+ *     tags: [Cohorts]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CourseCreateDTO'
+ *             $ref: '#/components/schemas/CohortCreateDTO'
  *     responses:
  *       201:
- *         description: Course created
+ *         description: Cohort created
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CourseResponseDTO'
+ *               $ref: '#/components/schemas/CohortResponseDTO'
  *
- * /courses/{id}:
+ * /cohorts/{id}:
  *   get:
- *     summary: Get course by ID
- *     tags: [Courses]
- *     parameters:
+ *     summary: Get cohort by ID
+ *     tags: [Cohorts]
+ *     parameters:  
  *       - in: path
  *         name: id
  *         required: true
@@ -49,14 +49,14 @@
  *           type: string
  *     responses:
  *       200:
- *         description: Course found
+ *         description: Cohort found
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CourseResponseDTO'
+ *               $ref: '#/components/schemas/CohortResponseDTO'
  *   put:
- *     summary: Update course by ID
- *     tags: [Courses]
+ *     summary: Update cohort by ID
+ *     tags: [Cohorts]
  *     parameters:
  *       - in: path
  *         name: id
@@ -68,17 +68,17 @@
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/CourseUpdateDTO'
+ *             $ref: '#/components/schemas/CohortUpdateDTO'
  *     responses:
  *       200:
- *         description: Course updated
+ *         description: Cohort updated
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/CourseResponseDTO'
+ *               $ref: '#/components/schemas/CohortResponseDTO'
  *   delete:
- *     summary: Delete course by ID
- *     tags: [Courses]
+ *     summary: Delete cohort by ID
+ *     tags: [Cohorts]
  *     parameters:
  *       - in: path
  *         name: id
@@ -87,5 +87,5 @@
  *           type: string
  *     responses:
  *       204:
- *         description: Course deleted
+ *         description: Cohort deleted
  */

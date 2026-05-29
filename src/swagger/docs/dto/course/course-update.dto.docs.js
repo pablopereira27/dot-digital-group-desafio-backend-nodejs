@@ -2,7 +2,7 @@
  * @openapi
  * components:
  *   schemas:
- *     UpdateCourseDTO:
+ *     CourseUpdateDTO:
  *       type: object
  *       properties:
  *         title:

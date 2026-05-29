@@ -42,14 +42,15 @@ Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e u
 ├── src/
 │    ├── database/migrations
 │    ├── domains/
-│    │    ├── courses/
+│    │    ├── course/
 │    │    │    ├── dto/
 │    │    │    ├── entities/
 │    │    │    ├── usecases/
 │    │    │    ├── validations/
 │    │    │    └── controllers/
-│    │    ├── users/
-│    │    └── enrollments/
+│    │    ├── cohort/
+│    │    ├── user/
+│    │    └── enrollment/
 │    ├── middlewares/
 │    ├── routes/
 │    ├── swagger/
@@ -58,6 +59,8 @@ Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e u
 │    ├── data-source.js
 │    └── index.js
 └── tests/
+     ├── integration/
+     └── unit/
 ```
 
 ## 🚀 Etapas de Desenvolvimento
@@ -119,7 +122,7 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 7. Documentar Endpoints de Turmas</summary>
+    <summary>✅ 7. Documentar Endpoints de Turmas</summary>
 
 - Implementar documentações para Endpoints e DTOs
 

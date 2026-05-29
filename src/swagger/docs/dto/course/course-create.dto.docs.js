@@ -2,7 +2,7 @@
  * @openapi
  * components:
  *   schemas:
- *     CreateCourseDTO:
+ *     CourseCreateDTO:
  *       type: object
  *       required:
  *         - title
