@@ -1,6 +1,4 @@
-const CourseController = require("../../src/domains/course/course.controller");
-
-function setupController() {
+function setupController(ControllerClass) {
   const managerMock = {
     getRepository: jest.fn().mockReturnValue({
       create: jest.fn().mockImplementation((dto) => ({ ...dto, id: 1 })),
@@ -8,7 +6,7 @@ function setupController() {
     }),
   };
 
-  const controller = new CourseController(managerMock);
+  const controller = new ControllerClass(managerMock);
 
   const res = {
     status: jest.fn().mockReturnThis(),

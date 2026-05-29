@@ -1,11 +1,12 @@
-const { setupController } = require("../../test-utils/course-controller.setup");
+const { setupController } = require("../../test-utils/controller.setup");
+const CourseController = require("../../../src/domains/course/course.controller");
 const UpdateCourseUseCase = require("../../../src/domains/course/usecases/update-course.usecase");
 
 describe("CourseController - UpdateCourse - Unit", () => {
   let controller, res, next;
 
   beforeEach(() => {
-    ({ controller, res, next } = setupController());
+    ({ controller, res, next } = setupController(CourseController));
   });
 
   it("deve retornar 400 se DTO inválido", async () => {

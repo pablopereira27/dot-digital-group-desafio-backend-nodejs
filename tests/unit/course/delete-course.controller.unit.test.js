@@ -1,15 +1,15 @@
-const { setupController } = require("../../test-utils/course-controller.setup");
+const { setupController } = require("../../test-utils/controller.setup");
+const CourseController = require("../../../src/domains/course/course.controller");
 const DeleteCourseUseCase = require("../../../src/domains/course/usecases/delete-course.usecase");
 
 describe("CourseController - DeleteCourse - Unit", () => {
   let controller, res, next;
 
   beforeEach(() => {
-    ({ controller, res, next } = setupController());
-    res.send = jest.fn(); // adicionar send no mock
+    ({ controller, res, next } = setupController(CourseController));
   });
 
-  it("deve retornar 404 se curso não encontrado", async () => {
+  it("deve retornar 404 se o curso não for encontrado", async () => {
     const req = { params: { id: 1 } };
 
     jest
@@ -24,7 +24,7 @@ describe("CourseController - DeleteCourse - Unit", () => {
     );
   });
 
-  it("deve deletar curso e retornar 204", async () => {
+  it("deve deletar o curso e retornar 204", async () => {
     const req = { params: { id: 1 } };
 
     jest

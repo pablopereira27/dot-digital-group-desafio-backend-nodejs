@@ -1,18 +1,18 @@
 const request = require("supertest");
 
-const availableThemes = [
-  "inovação",
-  "tecnologia",
-  "marketing",
-  "empreendedorismo",
-  "agro",
-];
+const ThemesEnum = {
+  INOVAÇÃO: "inovação",
+  TECNOLOGIA: "tecnologia",
+  MARKETING: "marketing",
+  EMPREENDENRISMO: "empreendedorismo",
+  AGRO: "agro",
+};
 
 describe("Course Controller - Integration Tests", () => {
   const courseData = {
     title: "Curso de JavaScript",
     description: "Aprenda JavaScript do básico ao avançado",
-    themes: availableThemes.slice(0, 2),
+    themes: Object.values(ThemesEnum).slice(0, 2),
     image_url: "https://example.com/course-image.jpg",
   };
 
