@@ -1,7 +1,6 @@
 const { plainToInstance } = require("class-transformer");
 const { validate } = require("class-validator");
 const { formatValidationErrors } = require("../../utils/validations");
-const { sanitizeQuery } = require("../../utils/sanitize-query");
 
 const CreateCohortUseCase = require("./usecases/create-cohort.usecase");
 const ListCohortsUseCase = require("./usecases/list-cohorts.usecase");
@@ -41,29 +40,17 @@ class CohortController {
 
   list = async (req, res, next) => {
     try {
-      const { page, limit, ...filters } = req.query;
-      const pageParsed = parseInt(page) || 1;
-      const actualPage = pageParsed > 0 ? pageParsed : 1;
-
-      const limitParsed = parseInt(limit) || 10;
-      const selectedLimit =
-        limitParsed > 0 ? (limitParsed > 100 ? 100 : limitParsed) : 10;
-
-      const filtersSanitized = sanitizeQuery(filters);
+      const { page, limit } = req.pagination;
 
       const usecase = new ListCohortsUseCase(this.manager);
-      const [cohorts, total] = await usecase.execute(
-        actualPage,
-        selectedLimit,
-        filtersSanitized,
-      );
+      const [cohorts, total] = await usecase.execute(page, limit, req.filters);
 
       res.json(
         new CohortListResponseDTO(cohorts, {
-          page: actualPage,
-          limit: selectedLimit,
+          page,
+          limit,
           total,
-          filters: filtersSanitized,
+          filters: req.filters,
         }),
       );
     } catch (error) {
