@@ -99,7 +99,7 @@ Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e u
 </details>
 
 <details>
-    <summary>⬜ 5. Implementação do CRUD de Turmas (Cohorts)</summary>
+    <summary>✅ 5. Implementação do CRUD de Turmas (Cohorts)</summary>
 Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado da linguagem
 
 - Criar Migrations e definir Entidade nos parâmetros do ORM

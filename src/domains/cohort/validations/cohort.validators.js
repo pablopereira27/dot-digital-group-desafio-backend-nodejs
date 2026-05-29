@@ -37,7 +37,7 @@ function applyCohortValidators(target, { optional = false } = {}) {
   IsNotEmpty()(target.prototype, "vacancies");
   IsPositive()(target.prototype, "vacancies");
 
-  IsEnum(CohortStatus)(target.prototype, "status");
+  IsEnum(Object.values(CohortStatus))(target.prototype, "status");
 
   IsDateString()(target.prototype, "start_date");
   IsNotEmpty()(target.prototype, "start_date");

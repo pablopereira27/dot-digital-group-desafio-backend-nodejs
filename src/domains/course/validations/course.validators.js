@@ -31,7 +31,7 @@ function applyCourseValidators(target, { optional = false } = {}) {
 
   IsArray()(target.prototype, "themes");
   ArrayNotEmpty()(target.prototype, "themes");
-  IsIn(ThemesEnum, { each: true })(target.prototype, "themes");
+  IsIn(Object.values(ThemesEnum), { each: true })(target.prototype, "themes");
 
   IsString()(target.prototype, "image_url");
   IsNotEmpty()(target.prototype, "image_url");
