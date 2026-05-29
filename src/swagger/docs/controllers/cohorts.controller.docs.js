@@ -13,6 +13,23 @@
  *         name: limit
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: title
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: status
+ *         schema:
+ *           type: string
+ *           enum: [disponível, encerrado]
+ *       - in: query
+ *         name: start_date
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: end_date
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: List of cohorts

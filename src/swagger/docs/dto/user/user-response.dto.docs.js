@@ -23,5 +23,18 @@
  *         updated_at:
  *           type: string
  *           format: date-time
+ *         links:
+ *           type: object
+ *           properties:
+ *             self:
+ *               type: string
+ *             list:
+ *               type: string
+ *             create:
+ *               type: string
+ *             update:
+ *               type: string
+ *             delete:
+ *               type: string
  *
  */

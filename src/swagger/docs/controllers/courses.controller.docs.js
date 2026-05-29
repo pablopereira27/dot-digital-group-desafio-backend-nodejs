@@ -13,6 +13,15 @@
  *         name: limit
  *         schema:
  *           type: integer
+ *       - in: query
+ *         name: title
+ *         schema:
+ *           type: string
+ *       - in: query
+ *         name: themes
+ *         schema:
+ *           type: string
+ *           enum: [inovação, tecnologia, marketing, empreendedorismo, agro]
  *     responses:
  *       200:
  *         description: List of courses

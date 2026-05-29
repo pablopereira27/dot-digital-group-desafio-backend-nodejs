@@ -46,4 +46,17 @@
  *         course_id:
  *           type: integer
  *           description: ID of the associated course
+ *         links:
+ *           type: object
+ *           properties:
+ *             self:
+ *               type: string
+ *             list:
+ *               type: string
+ *             create:
+ *               type: string
+ *             update:
+ *               type: string
+ *             delete:
+ *               type: string
  */

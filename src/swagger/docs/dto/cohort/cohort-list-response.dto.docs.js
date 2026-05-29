@@ -39,8 +39,12 @@
  *           properties:
  *             self:
  *               type: string
- *             next:
+ *             first:
  *               type: string
  *             prev:
+ *               type: string
+ *             next:
+ *               type: string
+ *             last:
  *               type: string
  */
