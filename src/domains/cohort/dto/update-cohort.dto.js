@@ -1,4 +1,4 @@
-const { applyCohortValidators } = require("../validations/cohort.validators");
+const { applyCohortValidators } = require("../validators/cohort.validator");
 
 class UpdateCohortDTO {
   title;

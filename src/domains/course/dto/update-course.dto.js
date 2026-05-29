@@ -1,4 +1,4 @@
-const { applyCourseValidators } = require("../validations/course.validators");
+const { applyCourseValidators } = require("../validators/course.validator");
 
 class UpdateCourseDTO {
   title;
