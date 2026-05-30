@@ -14,7 +14,7 @@ class EnrollmentResponseDTO {
       updated_at: enrollment.updated_at,
     });
 
-    this.links = buildHateoasLinks("/enrollments", { id: enrollment.id });
+    this.links = buildHateoasLinks("/enrollments", { id: enrollment.id }, [ "self", "update", "delete" ]);
   }
 }
 module.exports = EnrollmentResponseDTO;

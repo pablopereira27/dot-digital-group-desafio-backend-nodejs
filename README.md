@@ -183,7 +183,6 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 - Implementar Controller e UseCases com regras de negócio:
   - Não permitir matrícula em turmas encerradas ou fora da data de início/fim
   - Impedir múltiplas matrículas ativas para o mesmo curso
-  - Permitir nova matrícula em outra turma do mesmo curso se status anterior for diferente de `ativo`
 - Aplicar validações e tratamentos via DTOs em entradas e saídas
 
 </details>
