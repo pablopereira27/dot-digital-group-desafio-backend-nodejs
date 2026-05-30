@@ -172,7 +172,7 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 </details>
 
 <details>
-    <summary>⬜ 12. Implementação dos Endpoints de Matrículas (Enrollments)</summary>
+    <summary>✅ 12. Implementação dos Endpoints de Matrículas (Enrollments)</summary>
 
 - Criar Migrations e definir Entidade `Enrollment` com status (`ativo`, `trancado`, `abandonado`, `concluído`)
 - Definir Rotas:
@@ -191,13 +191,11 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
     <summary>⬜ 13. Testes Unitários/Integração para Matrículas</summary>
 
 - Testes Unitários com Jest para entidade, DTOs e regras de negócio
-- Testes de Integração com Supertest para endpoints (`POST /enrollments`, `PATCH /enrollments/:id`, `GET /users/:id/courses`)
+- Testes de Integração com Supertest para endpoints (`POST /enrollments`, `PATCH /enrollments/:id`, `DELETE /enrollments/:id`, `GET /users/:id/courses`)
 - Cobrir casos de sucesso e falha:
   - Matrícula válida
   - Tentativa em turma encerrada ou fora do período
   - Tentativa duplicada no mesmo curso
-  - Atualização de status e re-matrícula em nova turma
-  - Listagem de cursos disponíveis com filtros
   - Listagem de cursos do usuário com histórico de matrículas
 
 </details>
