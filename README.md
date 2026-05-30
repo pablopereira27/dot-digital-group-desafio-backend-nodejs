@@ -187,8 +187,18 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
 
 </details>
 
+
 <details>
-    <summary>⬜ 13. Testes Unitários/Integração para Matrículas</summary>
+    <summary>✅ 13. Documentar Endpoints de Matrículas</summary>
+
+- Documentar no Swagger/OpenAPI os endpoints de matrícula (`POST`, `PATCH`, `DELETE`)
+- Documentar DTOs de entrada e saída com exemplos de status (`ativo`, `trancado`, `abandonado`, `concluído`)
+- Documentar endpoint `GET /users/:id/courses` incluindo histórico de matrículas
+
+</details>
+
+<details>
+    <summary>⬜ 14. Testes Unitários/Integração para Matrículas</summary>
 
 - Testes Unitários com Jest para entidade, DTOs e regras de negócio
 - Testes de Integração com Supertest para endpoints (`POST /enrollments`, `PATCH /enrollments/:id`, `DELETE /enrollments/:id`, `GET /users/:id/courses`)
@@ -197,15 +207,6 @@ Obs: Turma se chamará Cohort, pois o nome Class conflitaria com termo reservado
   - Tentativa em turma encerrada ou fora do período
   - Tentativa duplicada no mesmo curso
   - Listagem de cursos do usuário com histórico de matrículas
-
-</details>
-
-<details>
-    <summary>⬜ 14. Documentar Endpoints de Matrículas</summary>
-
-- Documentar no Swagger/OpenAPI os endpoints de matrícula (`POST`, `PATCH`)
-- Documentar DTOs de entrada e saída com exemplos de status (`ativo`, `trancado`, `abandonado`, `concluído`)
-- Documentar endpoint `GET /users/:id/courses` incluindo histórico de matrículas e HATEOAS links
 
 </details>
 

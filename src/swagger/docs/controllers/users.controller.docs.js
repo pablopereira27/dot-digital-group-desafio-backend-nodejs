@@ -96,4 +96,21 @@
  *     responses:
  *       204:
  *         description: User deleted
+ * /users/{id}/courses:
+ *   get:
+ *     summary: Get user course enrollments by user ID
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: User found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/EnrollmentListResponseDTO'
  */
