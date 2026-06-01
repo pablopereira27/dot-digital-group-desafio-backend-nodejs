@@ -13,10 +13,46 @@ Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e u
 ### Casos de uso
 
 1. Deve ser possível criar um curso e criar turmas para esse curso;
+    - Para criar curso utilize o endpoint POST `/courses`
+    ```
+    {
+        "title": "Curso Avançado de Algoritmos",
+        "description": "Descrição do Curso",
+        "themes": ["tecnologia", "inovação"],
+        "image_url": "https://vivendoaprogramacao.com.br/wp-content/uploads/2023/10/melhores-cursos-de-programacao-2-300x300.png"    
+    }
+    ```
+    - Para criar turma utilize o endpoint POST `/cohorts`
+    ```
+    { 
+        "title": "Turma 2026-01",
+        "description": "Primeira Turma de 2026 para o Curso Avançado de Algoritmos",
+        "start_date": "2026-02-01",
+        "end_date": "2026-06-30",
+        "vacancies": 30,
+        "status": "disponível",
+        "course_id": 1
+    }
+    ```
+
 2. Cursos com turmas disponíveis devem ser listadas em um endpoint para visualização e deve possuir os seguintes filtros: filtro por título e filtro por temas;
+    - Ao acesso o endpoint de cursos POST `/courses` adicionando o filtro `status=disponível`, será entregue uma lista contendo apenas os cursos com turmas que possuam as seguinte características:
+        - Turma com status igual a disponível.
+        - Vagas sobrando `vacancies > 0`
+        - Data de início anterior a data atual (ou a uma data passada por filtro)
+        - Data de término posterior a data atual (ou a uma data passada por filtro)
 3. Deve ser possível matricular um usuário em uma turma disponível;
+    - Para criar uma matrícula utilize o endpoint POST `/enrollments`
+    ```
+    {
+        "user_id": 1,
+        "cohort_id": 1
+    }
+    ```
 4. Não deve permitir matricular um usuário em turmas encerradas ou fora da data de início e fim;
 5. Deve ser possível listar todos os cursos que um usuário está matriculado;
+    - Para listar os cursos nos quais o usuário foi matriculado, utilize o endpoint `/users/:id/courses`
+    - Esse endpoint retornar todas matrículas, onde cada uma contém os dados das devidas turmas e cursos.
 6. Um usuário não deve conseguir se matricular em mais de uma turma para o mesmo curso.
 
 ### Fora de escopo
