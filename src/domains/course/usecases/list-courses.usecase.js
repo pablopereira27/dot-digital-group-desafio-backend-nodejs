@@ -26,6 +26,13 @@ class ListCoursesUseCase {
       });
 
       if (filters.status === "disponível") {
+        const now = new Date().toISOString().split("T")[0];
+        qb.andWhere("cohort.start_date <= :start_date", {
+          start_date: filters.start_date || now,
+        });
+        qb.andWhere("cohort.end_date >= :end_date", {
+          end_date: filters.end_date || now,
+        });
         qb.andWhere("cohort.vacancies > 0");
       }
     }
@@ -54,6 +61,8 @@ class ListCoursesUseCase {
       );
     }
 
+    qb.orderBy("course.title", "ASC");
+    qb.addOrderBy("cohort.start_date", "ASC");
     qb.skip(page > 1 ? (page - 1) * limit : 0).take(limit);
 
     return await qb.getManyAndCount();
