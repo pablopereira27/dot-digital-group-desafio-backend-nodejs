@@ -19,6 +19,8 @@ class ListUserEnrollmentsUseCase {
         "cohort.vacancies",
         "cohort.start_date",
         "cohort.end_date",
+        "course.title",
+        "course.themes",
       ]);
 
     if (filters.status) {
