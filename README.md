@@ -59,6 +59,31 @@ Desenvolver uma **REST API em Node.js** para gerenciamento de cursos, turmas e u
 
 1. Não é necessário implementar login e autenticação para o usuário.
 
+## Como rodar?
+
+- Copie o arquivo `.env.example` renomeando para `.env`
+- Ajuste variáveis relacionadas ao banco da dados.
+    - Você pode optar por utilizar um banco de dados fora do docker se quiser.
+    - Foi utilizado o MySQL no desenvolvimento.
+- Instale os pacotes através do `npm install` 
+- Suba a imagem docker rodando os comandos: `docker-compose build` e `docker-compose up -d`
+- Você também consegue rodar a aplicação sem o docker utilizando o `npm start`
+- Para rodar os teste utilize `npm test`
+
+## Observações
+
+- Todos o código foi feito em inglês e por consequência os endpoints também.
+- O termo `Cohort` significa "um grupo de pessoas que compartilham uma característica comum ou aspecto de comportamento", pelo que pude encontrar, é um termo comumente utilizado no ramo educacional, e o mesmo foi escolhido para substituir o termo `Class` para não conflitar com palavra reservada da linguagem.
+- Não foi solicitado uso de Banco de Dados, ORM, Arquitetura, nem testes de integração, mas acabei tomando essa iniciativa. Porém por falta de tempo ou talvez por estar ansioso para enviar o código do desafio, optei por não melhorar muitas outras coisas.
+- Infelizmente acabei não incluindo seeds para popular o banco de dados, facilitando o manuseio do backend junto ao frontend.
+
+## Informações de Contato
+
+Qualquer dúvida ou necessidade de ajustes ou informações adicionais, fique a vontade para entrar em contato.
+
+E-mail: `pablopereira27@gmail.com`
+Whatsapp: `(21) 96441-7779`
+
 ## 🛠️ Tecnologias Utilizadas
 
 - **Node.js** → runtime do backend.
