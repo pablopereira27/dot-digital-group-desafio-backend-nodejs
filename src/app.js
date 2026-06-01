@@ -1,5 +1,6 @@
 // Core libraries
 const express = require("express");
+const cors = require("cors");
 const pino = require("pino-http");
 
 // Utilitários e Middlewares
@@ -17,6 +18,11 @@ function createApp(manager) {
   const app = express();
 
   // Middlewares Globais
+  app.use(
+    cors({
+      origin: process.env.CORS_ALLOWED_ORIGINS.split(","),
+    }),
+  );
   app.use(pino({ logger }));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
