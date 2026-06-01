@@ -1,10 +1,6 @@
 const request = require("supertest");
 
-const { createCourse } = require("../helpers/course.helper");
-const { createCohort } = require("../helpers/cohort.helper");
 const { createUser } = require("../helpers/user.helper");
-const { courseData } = require("../fixtures/course.fixture");
-const { cohortData } = require("../fixtures/cohort.fixture");
 const { userData } = require("../fixtures/user.fixture");
 
 describe("User Controller - Integration Tests", () => {
